@@ -1,4 +1,4 @@
 void testFunc()
 {
- 
+    printf("ya");
 }
