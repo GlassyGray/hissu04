@@ -3,5 +3,7 @@
 int main(){
  printf("ya");
  testFunc();
+ 
+ printf("fucker");
  return 0;
 }
