@@ -3,6 +3,7 @@
 
 int main(int argc, char* argv[])
 {
+	func();
     testFunc();
     return 0;
 }
