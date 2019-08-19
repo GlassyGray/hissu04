@@ -1,38 +1,31 @@
-def Print_Array(A,x,y):
-    i=j=0
-    print()
-    while j<y:
-        while i<x:
-            print("%3d"%A[j][i],end="  ")
-            i+=1
-        print()
-        i=0
-        j+=1
-    print()
+string="""KOREA CCC BBB AAA
+KOREA CCC 1.0 0.0 0.0
+AAA BBB 0.428 0.144 0.428
+AAA KOREA 0.0 0.0 1.0
+CCC BBB 0.0 0.0 1.0
+KOREA BBB 1.0 0.0 0.0
+CCC AAA 0.0 0.0 1.0"""
+country=[0,0,0,0]
+winning_rate=[0,0,0,0]
+Nation = {"KOREA" : 0,"AAA" : 1,"BBB" : 2,"CCC" : 3}
 
-def Make_Array(A):
-    x=int(input("행의 수를 입력해 주세요 : "))
-    y=int(input("열의 수를 입력해 주세요 : "))
-    i=j=1
-    while j<=y:
-        Z=[]
-        while i<=x:
-            print(j,"열",i,"행의 값을 입력해주세요 :", end=" ")
-            while 1:
-                z=input()
-                if z>="0" and z<="9": break
-                print("정수치를 입력해주세요 :",end=" ")
-            Z.append(int(z))
-            i+=1
-        A.append(Z)
-        j+=1
-        i=1
-    return int(x),int(y)
-
-A=[]
-B=[]
-result=[]
-x1,y1=Make_Array(A)
-x2,y2=Make_Array(B)
-Print_Array(A,x1,y1)
-Print_Array(B,x2,y2)
+def score(A,B,x,y,z,country):
+    for i in [A,B]:
+        k= 1 if i is A else 0
+        country[Nation[i]]+=3*k*x+y+3*(1-k)*z
+String=string.split("\n")
+for i in range(1,7):
+    line=String[i].split()
+    score(line[0],line[1],float(line[2]),float(line[3]),float(line[4]),country)
+count1=0
+while country!=[0,0,0,0]:
+    Max=max(country)
+    count2=country.count(Max)
+    count1+=count2
+    for i in [0,1,2,3]:
+        if country[i]==Max: 
+            winning_rate[i]=1/count2
+            country[i]=0
+    if count1>=2: break
+for i in [0,3,2,1]:
+    print(winning_rate[i])
